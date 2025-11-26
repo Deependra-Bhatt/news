@@ -1,78 +1,156 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+// pages/index.js
+import Head from "next/head";
+import Navbar from "@/components/Navbar";
+import NewsCard from "@/components/NewsCard";
+import {
+  getTopHeadlinesArticles,
+  getEverythingArticles,
+} from "../data/newsData";
+import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export default function Home({ featuredArticles, otherArticles }) {
+  const [now, setNow] = useState("");
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  useEffect(() => {
+    setNow(new Date().toLocaleString("hi-IN"));
+  }, []);
 
-export default function Home() {
+  const mainHero = featuredArticles[0] || otherArticles[0];
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Head>
+        <title>NEWS | Hindi News</title>
+        <meta
+          name="description"
+          content="A simplified front-page clone of LiveHindustan built with Next.js and TailwindCSS."
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </Head>
+
+      <div className="min-h-screen bg-gray-100">
+        <Navbar />
+
+        <main className="mx-auto max-w-6xl px-4 py-4">
+          {/* Top bar with date etc. */}
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
+            <span>{now}</span>
+            <span>आप पढ़ रहे हैं: ताज़ा हिंदी खबरें</span>
+          </div>
+
+          {/* Main two-column layout */}
+          <div className="grid gap-4 lg:grid-cols-3">
+            {/* Left: Hero news */}
+            <div className="lg:col-span-2">
+              {mainHero && <NewsCard article={mainHero} variant="hero" />}
+
+              {/* Below hero: list of other highlighted articles */}
+              <section className="mt-4 rounded-md bg-white p-3 shadow">
+                <h2 className="border-b border-gray-200 pb-2 text-sm font-bold text-red-700">
+                  टॉप खबरें
+                </h2>
+                <div>
+                  {featuredArticles
+                    .filter((a) => a.slug !== mainHero.slug)
+                    .map((article) => (
+                      <NewsCard key={article.id} article={article} />
+                    ))}
+                </div>
+              </section>
+            </div>
+
+            {/* Right column: side section */}
+            <aside className="space-y-4">
+              <section className="rounded-md bg-white p-3 shadow">
+                <h2 className="border-b border-gray-200 pb-2 text-sm font-bold text-red-700">
+                  लेटेस्ट अपडेट्स
+                </h2>
+                {otherArticles.map((article) => (
+                  <NewsCard key={article.id} article={article} />
+                ))}
+              </section>
+
+              <section className="rounded-md bg-white p-3 shadow">
+                <h2 className="border-b border-gray-200 pb-2 text-sm font-bold">
+                  Sponsored
+                </h2>
+                <p className="mt-2 text-xs text-gray-600">
+                  यह सेक्शन किसी विज्ञापन या विशेष कैंपेन के लिए उपयोग किया जा
+                  सकता है।
+                </p>
+              </section>
+            </aside>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
+
+// ---- DATA FETCHING ----
+
+export async function getStaticProps() {
+  // Fetch both in parallel
+  const [everythingRaw, topHeadlinesRaw] = await Promise.all([
+    getEverythingArticles(),
+    getTopHeadlinesArticles(),
+  ]);
+
+  // Map both to the UI shape expected by components
+  const mapToUiShape = (a) => ({
+    id: a.id,
+    slug: a.slug,
+    title: a.title,
+    category: a.category,
+    image: a.imageUrl,
+    excerpt: a.excerpt,
+    content: a.content,
+    author: a.category + " Desk",
+    publishedAt: a.date,
+    sourceUrl: a.sourceUrl,
+  });
+
+  const featuredArticles = everythingRaw.map(mapToUiShape);
+  const otherArticles = topHeadlinesRaw.map(mapToUiShape);
+
+  return {
+    props: {
+      featuredArticles,
+      otherArticles,
+    },
+    revalidate: 600,
+  };
+}
+
+// export async function getStaticProps() {
+//   // Fetch articles from NewsAPI via our helper
+//   const apiArticles = await getArticles();
+
+//   // Map API shape -> UI shape expected by components
+//   const allNews = apiArticles.map((a) => ({
+//     id: a.id,
+//     slug: a.slug,
+//     title: a.title,
+//     category: a.category,
+//     image: a.imageUrl,
+//     excerpt: a.excerpt,
+//     content: a.content,
+//     author: a.category + " Desk",
+//     publishedAt: a.date,
+//     sourceUrl: a.sourceUrl,
+//   }));
+
+//   // Split into 2 halves: first half = featured, second = latest
+//   const mid = Math.ceil(allNews.length / 2);
+//   const featuredArticles = allNews.slice(0, mid);
+//   const otherArticles = allNews.slice(mid);
+
+//   return {
+//     props: {
+//       featuredArticles,
+//       otherArticles,
+//     },
+//     revalidate: 600, // ISR: optional
+//   };
+// }
