@@ -13,6 +13,22 @@ const createSlug = (title) => {
     .replace(/^-+|-+$/g, "");
 };
 
+const normalizeImageUrl = (url, category) => {
+  const fallbackText = encodeURIComponent(category || "News");
+
+  // If no image from API, use placeholder
+  if (!url || url === "[Removed]") {
+    return `https://placehold.co/600x400/007bff/ffffff?text=${fallbackText}`;
+  }
+
+  // Force http -> https (Next.js prefers https)
+  if (url.startsWith("http://")) {
+    return url.replace("http://", "https://");
+  }
+
+  return url;
+};
+
 const mapNewsApiArticleToAppArticle = (newsApiArticle, index) => {
   const title = newsApiArticle.title || `Untitled Article ${index}`;
   const slug = createSlug(title);
@@ -23,11 +39,7 @@ const mapNewsApiArticleToAppArticle = (newsApiArticle, index) => {
     slug,
     title,
     excerpt: newsApiArticle.description || "Click to read the full article.",
-    imageUrl:
-      newsApiArticle.urlToImage ||
-      `https://placehold.co/600x400/007bff/ffffff?text=${encodeURIComponent(
-        category
-      )}`,
+    imageUrl: normalizeImageUrl(newsApiArticle.urlToImage, category),
     category: category.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Unknown",
     date: newsApiArticle.publishedAt,
     views: Math.floor(Math.random() * 20000) + 1000,

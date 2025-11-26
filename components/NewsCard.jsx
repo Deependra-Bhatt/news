@@ -11,7 +11,7 @@ export default function NewsCard({ article, variant = "default" }) {
         <div className="relative h-56 w-full md:h-72">
           <Image
             src={article.image}
-            alt={article.title}
+            alt={article.title.substring(0, 12)}
             fill
             className="rounded-md object-cover"
           />
@@ -39,31 +39,61 @@ export default function NewsCard({ article, variant = "default" }) {
     );
   }
 
-  // default small card
+  // Top News Card
+  if (variant === "topNews") {
+    return (
+      <article className="flex gap-3 border-b border-gray-200 pb-3 pt-3 last:border-b-0">
+        <div className="relative h-28 w-28 flex-shrink-0">
+          <Image
+            src={article.image}
+            alt={article.title.substring(0, 12)}
+            fill
+            className="rounded object-cover"
+          />
+        </div>
+        <div className="flex flex-1 flex-col justify-between">
+          <Link href={href}>
+            <h3 className="text-lg font-semibold leading-snug hover:text-red-700">
+              {article.title}
+            </h3>
+          </Link>
+          <p className="mt-1 text-sm text-gray-600 line-clamp-2">
+            {article.excerpt}
+          </p>
+          <p className="mt-1 text-[11px] text-gray-400">
+            {article.category} •{" "}
+            {new Date(article.publishedAt).toLocaleDateString("hi-IN")}
+          </p>
+        </div>
+      </article>
+    );
+  }
+
+  //small card
   return (
-    <article className="flex gap-3 border-b border-gray-200 pb-3 pt-3 last:border-b-0">
-      <div className="relative h-20 w-28 flex-shrink-0">
-        <Image
-          src={article.image}
-          alt={article.title}
-          fill
-          className="rounded object-cover"
-        />
-      </div>
-      <div className="flex flex-1 flex-col justify-between">
-        <Link href={href}>
-          <h3 className="text-sm font-semibold leading-snug hover:text-red-700">
-            {article.title}
-          </h3>
-        </Link>
-        <p className="mt-1 text-xs text-gray-600 line-clamp-2">
-          {article.excerpt}
-        </p>
-        <p className="mt-1 text-[11px] text-gray-400">
-          {article.category} •{" "}
-          {new Date(article.publishedAt).toLocaleDateString("hi-IN")}
-        </p>
-      </div>
-    </article>
-  );
+      <article className="flex gap-3 border-b border-gray-200 pb-3 pt-3 last:border-b-0 overflow-clip">
+        <div className="relative h-20 w-28 flex-shrink-0">
+          <Image
+            src={article.image}
+            alt={article.title.substring(0, 12)}
+            fill
+            className="rounded object-cover"
+          />
+        </div>
+        <div className="flex flex-1 flex-col justify-between">
+          <Link href={href}>
+            <h3 className="text-sm font-semibold leading-snug hover:text-red-700">
+              {article.title}
+            </h3>
+          </Link>
+          <p className="mt-1 text-xs text-gray-600 line-clamp-2">
+            {article.excerpt}
+          </p>
+          <p className="mt-1 text-[11px] text-gray-400">
+            {article.category} •{" "}
+            {new Date(article.publishedAt).toLocaleDateString("hi-IN")}
+          </p>
+        </div>
+      </article>
+    );
 }

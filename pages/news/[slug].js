@@ -51,9 +51,9 @@ export default function ArticlePage({ article }) {
           </h1>
 
           <div className="mt-2 text-xs text-gray-500">
-            <span>{article.author}</span> •{" "}
+            <span>{article.author}</span> •
             <span>
-              {published.toLocaleDateString("hi-IN")}{" "}
+              {published.toLocaleDateString("hi-IN")}
               {published.toLocaleTimeString("hi-IN")}
             </span>
           </div>

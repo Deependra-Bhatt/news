@@ -21,7 +21,7 @@ export default function Home({ featuredArticles, otherArticles }) {
   return (
     <>
       <Head>
-        <title>NEWS | Hindi News</title>
+        <title>Hindustan News | News</title>
         <meta
           name="description"
           content="A simplified front-page clone of LiveHindustan built with Next.js and TailwindCSS."
@@ -35,25 +35,25 @@ export default function Home({ featuredArticles, otherArticles }) {
           {/* Top bar with date etc. */}
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
             <span>{now}</span>
-            <span>आप पढ़ रहे हैं: ताज़ा हिंदी खबरें</span>
+            <span> You are reading latest news</span>
           </div>
 
           {/* Main two-column layout */}
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-10 lg:grid-cols-4">
             {/* Left: Hero news */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               {mainHero && <NewsCard article={mainHero} variant="hero" />}
 
               {/* Below hero: list of other highlighted articles */}
               <section className="mt-4 rounded-md bg-white p-3 shadow">
-                <h2 className="border-b border-gray-200 pb-2 text-sm font-bold text-red-700">
-                  टॉप खबरें
+                <h2 className="border-b border-gray-200 pb-2 text-lg font-bold text-red-700">
+                  Top News
                 </h2>
                 <div>
                   {featuredArticles
                     .filter((a) => a.slug !== mainHero.slug)
                     .map((article) => (
-                      <NewsCard key={article.id} article={article} />
+                      <NewsCard key={article.id} article={article} variant="topNews"/>
                     ))}
                 </div>
               </section>
@@ -62,8 +62,8 @@ export default function Home({ featuredArticles, otherArticles }) {
             {/* Right column: side section */}
             <aside className="space-y-4">
               <section className="rounded-md bg-white p-3 shadow">
-                <h2 className="border-b border-gray-200 pb-2 text-sm font-bold text-red-700">
-                  लेटेस्ट अपडेट्स
+                <h2 className="border-b border-gray-200 pb-2 text-lg font-bold text-red-700">
+                  Latest Updates
                 </h2>
                 {otherArticles.map((article) => (
                   <NewsCard key={article.id} article={article} />
@@ -74,9 +74,8 @@ export default function Home({ featuredArticles, otherArticles }) {
                 <h2 className="border-b border-gray-200 pb-2 text-sm font-bold">
                   Sponsored
                 </h2>
-                <p className="mt-2 text-xs text-gray-600">
-                  यह सेक्शन किसी विज्ञापन या विशेष कैंपेन के लिए उपयोग किया जा
-                  सकता है।
+                <p className="mt-2 text-sm text-gray-600" >
+                  This section can be used for advertisements.
                 </p>
               </section>
             </aside>
