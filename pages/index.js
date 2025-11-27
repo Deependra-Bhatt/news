@@ -12,6 +12,7 @@ import CategorySection from "@/components/CategorySection";
 import AdBanner from "@/components/AdBanner";
 
 export default function Home({ featuredArticles, otherArticles }) {
+  // Error Handling
   if (!featuredArticles.length && !otherArticles.length) {
     return (
       <>
@@ -45,15 +46,16 @@ export default function Home({ featuredArticles, otherArticles }) {
         <title>Hindustan News | News</title>
         <meta
           name="description"
-          content="A simplified front-page clone of LiveHindustan built with Next.js and TailwindCSS."
+          content="A simplified front-page clone of LiveHindustan"
         />
       </Head>
 
       <div className="min-h-screen bg-gray-100">
+        {/* NAVBAR SECTION */}
         <Navbar />
 
+        {/* MAIN SECTION  */}
         <main className="mx-5 max-w-7xl px-4 py-4">
-          {/* Top bar with date etc. */}
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
             <span>{now}</span>
             <span> You are reading latest news</span>
@@ -61,42 +63,35 @@ export default function Home({ featuredArticles, otherArticles }) {
 
           {/* Main two-column layout */}
           <div className="grid gap-10 lg:grid-cols-4">
-            {/* Left: Hero news */}
+            {/* Left: News Section */}
             <div className="lg:col-span-3">
-              {/* Top Hindi News section */}
               <CategorySection
                 title="Top Hindi News"
                 articles={featuredArticles.slice(0, 6)}
                 viewMoreHref="/"
               />
-
-              {/* Ad strip between sections */}
               <AdBanner />
-
-              {/* Another category, e.g. Technology / Entertainment */}
               <CategorySection
                 title="More Technology News"
                 articles={otherArticles.slice(6, 12)}
                 viewMoreHref="/"
               />
-
-              {/* You can add more sections similarly: */}
               <AdBanner />
               <CategorySection
                 title="Entertainment"
-                articles={otherArticles.slice(12, 18)}
+                articles={featuredArticles.slice(12, 18)}
                 viewMoreHref="/"
               />
               <AdBanner />
               <CategorySection
                 title="World"
-                articles={otherArticles.slice(18, 24)}
+                articles={otherArticles.slice(0, 6)}
                 viewMoreHref="/"
               />
               <AdBanner />
               <CategorySection
                 title="Business"
-                articles={otherArticles.slice(5, 11)}
+                articles={featuredArticles.slice(24, 30)}
                 viewMoreHref="/"
               />
               <AdBanner />
@@ -108,7 +103,7 @@ export default function Home({ featuredArticles, otherArticles }) {
               <AdBanner />
               <CategorySection
                 title="Space"
-                articles={otherArticles.slice(14, 20)}
+                articles={featuredArticles.slice(25, 31)}
                 viewMoreHref="/"
               />
               <AdBanner />
@@ -119,7 +114,7 @@ export default function Home({ featuredArticles, otherArticles }) {
               />
             </div>
 
-            {/* Right column: side section */}
+            {/* Right column: headlines section */}
             <aside className="space-y-4">
               <section className="rounded-md bg-white p-3 shadow">
                 <h2 className="border-b border-gray-200 pb-2 text-lg font-bold text-red-700">
@@ -141,6 +136,8 @@ export default function Home({ featuredArticles, otherArticles }) {
             </aside>
           </div>
         </main>
+
+        {/* FOOTER SECTION  */}
         <Footer />
       </div>
     </>

@@ -119,7 +119,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* MOBILE / DESKTOP SLIDE-OUT MENU (overlay) */}
+      {/* MOBILE / DESKTOP SLIDE-OUT MENU FOR HAMBURGER (overlay) */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 z-50 bg-black/40 overflow-y-auto"

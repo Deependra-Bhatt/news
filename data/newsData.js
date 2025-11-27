@@ -1,4 +1,4 @@
-// src/data/newsData.js or /data/newsData.js (your current path)
+// /data/newsData.js 
 
 // Base config
 const NEWS_API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
@@ -21,7 +21,7 @@ const normalizeImageUrl = (url, category) => {
     return `https://placehold.co/600x400/007bff/ffffff?text=${fallbackText}`;
   }
 
-  // Force http -> https (Next.js prefers https)
+  // Force http -> https
   if (url.startsWith("http://")) {
     return url.replace("http://", "https://");
   }
@@ -52,6 +52,7 @@ const mapNewsApiArticleToAppArticle = (newsApiArticle, index) => {
 };
 
 // ---- Helpers ----
+
 const fetchFromNewsApi = async (url) => {
   if (!NEWS_API_KEY) {
     console.error("NEWS_API_KEY is not set.");
@@ -93,17 +94,17 @@ const fetchFromNewsApi = async (url) => {
 
 // ---- Public functions ----
 
-// For sidebar (or vice versa)
+// For sidebar
 export const getTopHeadlinesArticles = async () => {
   const url = `${TOP_HEADLINES_URL}?category=technology&pageSize=20&apiKey=${NEWS_API_KEY}`;
   console.log("Fetching TOP HEADLINES:", url);
   return fetchFromNewsApi(url);
 };
 
-// For main content (or vice versa)
+// For main content
 export const getEverythingArticles = async () => {
   // q can be "technology" or "india" or "news" etc.
-  const url = `${EVERYTHING_URL}?q=technology&language=en&pageSize=40&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`;
+  const url = `${EVERYTHING_URL}?q=sports&language=en&pageSize=40&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`;
   console.log("Fetching EVERYTHING:", url);
   return fetchFromNewsApi(url);
 };

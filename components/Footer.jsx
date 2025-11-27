@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="mt-10 bg-black text-gray-300">
       <div className="mx-auto max-w-6xl px-4 py-10 space-y-8">
-        {/* ===== TOP: CATEGORY ROWS (FULL-WIDTH) ===== */}
+        {/* TOP: CATEGORY ROWS */}
         <div className="space-y-6 text-lg">
           <SectionRow
             title="Top Performing Sections"
@@ -185,7 +185,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* ===== MIDDLE: LOGO + SOCIAL + APPS ===== */}
+        {/* MIDDLE: LOGO + SOCIAL + APPS */}
         <div className="flex flex-col items-start gap-6 pt-6 md:flex-row md:items-center md:justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
@@ -251,7 +251,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ===== BOTTOM: LINKS + PARTNERS + COPYRIGHT ===== */}
+        {/*  BOTTOM: LINKS + PARTNERS + COPYRIGHT  */}
         <div className="pt-6 text-sm text-gray-400">
           {/* Hindi utility links row */}
           <div className="pt-3 pb-3">
@@ -303,7 +303,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Copyright bar (slightly darker strip) */}
+          {/* Copyright bar */}
           <div className="mt-1 bg-[#181818] py-3 text-center text-[12px] text-gray-500">
             Copyright © {new Date().getFullYear()} HT Digital Streams Limited.
             All Rights Reserved.
@@ -317,7 +317,7 @@ export default function Footer() {
   );
 }
 
-/* ===== Helper components ===== */
+/* Helper components */
 
 function SectionRow({ title, items }) {
   return (

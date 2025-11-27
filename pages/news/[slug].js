@@ -2,9 +2,15 @@
 import Head from "next/head";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import { getArticleBySlug, getTopHeadlinesArticles, getEverythingArticles } from "../../data/newsData";
+import {
+  getArticleBySlug,
+  getTopHeadlinesArticles,
+  getEverythingArticles,
+} from "../../data/newsData";
+import Footer from "@/components/Footer";
 
 export default function ArticlePage({ article }) {
+  // Error Handling
   if (!article) {
     return (
       <div className="min-h-screen bg-gray-100">
@@ -12,6 +18,7 @@ export default function ArticlePage({ article }) {
         <main className="mx-auto max-w-3xl px-4 py-6">
           <h1 className="text-xl font-bold">Article not found</h1>
         </main>
+        <Footer />
       </div>
     );
   }
@@ -34,7 +41,7 @@ export default function ArticlePage({ article }) {
   return (
     <>
       <Head>
-        <title>{article.title} | LiveHindustan Clone</title>
+        <title>{article.title} | LiveHindustan </title>
         <meta name="description" content={article.excerpt} />
         <script
           type="application/ld+json"
@@ -43,13 +50,15 @@ export default function ArticlePage({ article }) {
       </Head>
 
       <div className="min-h-screen bg-gray-100">
+        {/* NAVBAR SECTION  */}
         <Navbar />
+
+        {/* MAIN SECTION  */}
         <main className="mx-auto max-w-3xl px-4 py-6">
           <p className="text-xs text-red-700">{article.category}</p>
           <h1 className="mt-1 text-2xl font-bold leading-snug">
             {article.title}
           </h1>
-
           <div className="mt-2 text-xs text-gray-500">
             <span>{article.author}</span> •
             <span>
@@ -57,7 +66,6 @@ export default function ArticlePage({ article }) {
               {published.toLocaleTimeString("hi-IN")}
             </span>
           </div>
-
           <div className="relative mt-4 h-64 w-full md:h-80">
             <Image
               src={article.image}
@@ -66,7 +74,6 @@ export default function ArticlePage({ article }) {
               className="rounded-md object-cover"
             />
           </div>
-
           <article className="prose prose-sm mt-6 max-w-none prose-p:mb-3 prose-p:leading-relaxed">
             {article.content
               ?.toString()
@@ -77,7 +84,6 @@ export default function ArticlePage({ article }) {
                 <p key={idx}>{para.trim()}</p>
               ))}
           </article>
-
           {article.sourceUrl && (
             <p className="mt-4 text-xs text-blue-700">
               Source:{" "}
@@ -92,10 +98,15 @@ export default function ArticlePage({ article }) {
             </p>
           )}
         </main>
+
+        {/* FOOTER SECTION  */}
+        <Footer />
       </div>
     </>
   );
 }
+
+// --- DATA FETCHING ---
 
 export async function getStaticPaths() {
   const [everything, topHeadlines] = await Promise.all([

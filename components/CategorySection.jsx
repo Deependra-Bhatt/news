@@ -23,8 +23,8 @@ export default function CategorySection({
   if (!articles || articles.length === 0) return null;
 
   const mainArticle = articles[0];
-  const sideArticles = articles.slice(1, 4); // next 3 on the right
-  const bottomArticle = articles[4]; // optional wide article below hero (like entertainment section)
+  const sideArticles = articles.slice(1, 4); 
+  const bottomArticle = articles[4]; 
   const fallbackImage =
     "https://placehold.co/600x400/ef4444/ffffff?text=No+Image";
 
@@ -59,8 +59,6 @@ export default function CategorySection({
                 fill
                 className="object-cover"
               />
-
-              {/* dark overlay + title at bottom */}
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-3">
                 <h3 className="line-clamp-2 text-sm font-semibold text-white md:text-base">
@@ -70,7 +68,7 @@ export default function CategorySection({
             </div>
           </Link>
 
-          {/* Optional wide article below hero (like entertainment section) */}
+          {/* Wide article below hero */}
           {bottomArticle && (
             <Link
               href={`/news/${bottomArticle.slug}`}

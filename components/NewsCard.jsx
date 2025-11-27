@@ -7,7 +7,7 @@ export default function NewsCard({ article, variant = "default" }) {
   const fallbackImage =
     "https://placehold.co/600x400/ef4444/ffffff?text=No+Image";
 
-  //small card
+  //small card for latest updates
   return (
     <article className="flex gap-3 border-b border-gray-200 pb-3 pt-3 last:border-b-0 overflow-clip">
       <div className="relative h-auto w-28 shrink-0">
