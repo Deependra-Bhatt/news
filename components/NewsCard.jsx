@@ -22,7 +22,7 @@ export default function NewsCard({ article, variant = "default" }) {
             {article.title}
           </h3>
         </Link>
-        <p className="mt-1 text-xs text-gray-600 line-clamp-2">
+        <p className="mt-1 text-xs text-gray-600 line-clamp-3">
           {article.excerpt}
         </p>
         <p className="mt-1 text-[11px] text-gray-400">
