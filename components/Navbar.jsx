@@ -56,40 +56,42 @@ export default function Navbar() {
           </Link>
 
           {/* Right actions (desktop only) */}
-          <div className="ml-auto hidden items-center gap-5 text-md text-red-700 md:flex">
-            <button className="flex items-center gap-1 hover:text-red-800">
-              <FaRegImage />
-              <span>Photos</span>
-            </button>
-            <span className="text-gray-500 text-xl"> | </span>
-            <button className="flex items-center gap-1 hover:text-red-800">
-              <FaRegPlayCircle />
-              <span>Videos</span>
-            </button>
-            <span className="text-gray-500 text-xl"> | </span>
-            <button className="flex items-center gap-1 hover:text-red-800">
-              <FaMapMarkerAlt />
-              <span>Select City</span>
-            </button>
-            <span className="text-gray-500 text-xl"> | </span>
-            <button className="flex items-center gap-1 hover:text-red-800">
-              <FaRegNewspaper />
-              <span>E-Paper</span>
-            </button>
-            <span className="text-gray-500 text-xl"> | </span>
-            <button className="flex items-center gap-1 hover:text-red-800">
-              <FaUser />
-              <span>Sign In</span>
-            </button>
-          </div>
+          <div className=" ml-auto items-center gap-5 hidden md:flex-col sm:flex lg:flex-row">
+            <div className="ml-auto hidden items-center gap-5 text-md text-red-700 md:flex">
+              <button className="flex items-center gap-1 hover:text-red-800">
+                <FaRegImage />
+                <span>Photos</span>
+              </button>
+              <span className="text-gray-500 text-xl"> | </span>
+              <button className="flex items-center gap-1 hover:text-red-800">
+                <FaRegPlayCircle />
+                <span>Videos</span>
+              </button>
+              <span className="text-gray-500 text-xl"> | </span>
+              <button className="flex items-center gap-1 hover:text-red-800">
+                <FaMapMarkerAlt />
+                <span>Select City</span>
+              </button>
+              <span className="text-gray-500 text-xl"> | </span>
+              <button className="flex items-center gap-1 hover:text-red-800">
+                <FaRegNewspaper />
+                <span>E-Paper</span>
+              </button>
+              <span className="text-gray-500 text-xl"> | </span>
+              <button className="flex items-center gap-1 hover:text-red-800">
+                <FaUser />
+                <span>Sign In</span>
+              </button>
+            </div>
 
-          {/* Search (desktop) */}
-          <div className="hidden items-center rounded-full border border-gray-300 px-3 py-1 text-sm md:flex">
-            <input
-              className="w-40 bg-transparent text-gray-700 outline-none placeholder:text-gray-400"
-              placeholder="Search here"
-            />
-            <FiSearch className="ml-2 text-gray-500" />
+            {/* Search (desktop) */}
+            <div className="hidden items-center rounded-full mx-auto border border-gray-300 px-3 py-1 text-sm md:flex">
+              <input
+                className="w-40 bg-transparent text-gray-700 outline-none placeholder:text-gray-400"
+                placeholder="Search here"
+              />
+              <FiSearch className="ml-2 text-gray-500" />
+            </div>
           </div>
         </div>
       </div>
@@ -111,7 +113,9 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <span className="mr-auto hidden text-gray-500 md:inline md:text-lg md:font-bold">...</span>
+          <span className="mr-auto hidden text-gray-500 md:inline md:text-lg md:font-bold">
+            ...
+          </span>
         </div>
       </nav>
 

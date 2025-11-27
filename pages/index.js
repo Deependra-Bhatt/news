@@ -12,13 +12,32 @@ import CategorySection from "@/components/CategorySection";
 import AdBanner from "@/components/AdBanner";
 
 export default function Home({ featuredArticles, otherArticles }) {
+  if (!featuredArticles.length && !otherArticles.length) {
+    return (
+      <>
+        <Navbar />
+
+        <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center px-4">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-gray-800">
+              No news available
+            </h2>
+            <p className="mt-2 text-sm text-gray-500">
+              Please try again later.
+            </p>
+          </div>
+        </div>
+
+        <Footer />
+      </>
+    );
+  }
+
   const [now, setNow] = useState("");
 
   useEffect(() => {
     setNow(new Date().toLocaleString("hi-IN"));
   }, []);
-
-  const mainHero = featuredArticles[0] || otherArticles[0];
 
   return (
     <>
@@ -77,7 +96,7 @@ export default function Home({ featuredArticles, otherArticles }) {
               <AdBanner />
               <CategorySection
                 title="Business"
-                articles={otherArticles.slice(5,11)}
+                articles={otherArticles.slice(5, 11)}
                 viewMoreHref="/"
               />
               <AdBanner />
@@ -89,9 +108,10 @@ export default function Home({ featuredArticles, otherArticles }) {
               <AdBanner />
               <CategorySection
                 title="Space"
-                articles={otherArticles.slice(14,20)}
+                articles={otherArticles.slice(14, 20)}
                 viewMoreHref="/"
-              /><AdBanner />
+              />
+              <AdBanner />
               <CategorySection
                 title="Lifestyle"
                 articles={otherArticles.slice(8, 14)}
@@ -161,35 +181,3 @@ export async function getStaticProps() {
     revalidate: 600,
   };
 }
-
-// export async function getStaticProps() {
-//   // Fetch articles from NewsAPI via our helper
-//   const apiArticles = await getArticles();
-
-//   // Map API shape -> UI shape expected by components
-//   const allNews = apiArticles.map((a) => ({
-//     id: a.id,
-//     slug: a.slug,
-//     title: a.title,
-//     category: a.category,
-//     image: a.imageUrl,
-//     excerpt: a.excerpt,
-//     content: a.content,
-//     author: a.category + " Desk",
-//     publishedAt: a.date,
-//     sourceUrl: a.sourceUrl,
-//   }));
-
-//   // Split into 2 halves: first half = featured, second = latest
-//   const mid = Math.ceil(allNews.length / 2);
-//   const featuredArticles = allNews.slice(0, mid);
-//   const otherArticles = allNews.slice(mid);
-
-//   return {
-//     props: {
-//       featuredArticles,
-//       otherArticles,
-//     },
-//     revalidate: 600, // ISR: optional
-//   };
-// }

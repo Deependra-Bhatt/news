@@ -25,9 +25,11 @@ export default function CategorySection({
   const mainArticle = articles[0];
   const sideArticles = articles.slice(1, 4); // next 3 on the right
   const bottomArticle = articles[4]; // optional wide article below hero (like entertainment section)
+  const fallbackImage =
+    "https://placehold.co/600x400/ef4444/ffffff?text=No+Image";
 
   return (
-    <section className="mb-8 rounded-md bg-white p-3 shadow">
+    <section className="mb-8 rounded-md bg-white p-3 shadow shadow-slate-300">
       {/* Section header */}
       <div className="mb-3 flex items-baseline justify-between">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-900">
@@ -52,7 +54,7 @@ export default function CategorySection({
           <Link href={`/news/${mainArticle.slug}`}>
             <div className="relative h-52 w-full overflow-hidden rounded-md md:h-64">
               <Image
-                src={mainArticle.image}
+                src={mainArticle.image || fallbackImage}
                 alt={mainArticle.title}
                 fill
                 className="object-cover"
@@ -76,7 +78,7 @@ export default function CategorySection({
             >
               <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded">
                 <Image
-                  src={bottomArticle.image}
+                  src={bottomArticle.image || fallbackImage}
                   alt={bottomArticle.title}
                   fill
                   className="object-cover"
@@ -107,7 +109,7 @@ export default function CategorySection({
             >
               <div className="relative h-auto w-20 shrink-0 overflow-hidden rounded">
                 <Image
-                  src={article.image}
+                  src={article.image || fallbackImage}
                   alt={article.title}
                   fill
                   className="object-cover"
