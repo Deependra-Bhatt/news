@@ -8,6 +8,8 @@ import {
 } from "../data/newsData";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
+import CategorySection from "@/components/CategorySection";
+import AdBanner from "@/components/AdBanner";
 
 export default function Home({ featuredArticles, otherArticles }) {
   const [now, setNow] = useState("");
@@ -31,7 +33,7 @@ export default function Home({ featuredArticles, otherArticles }) {
       <div className="min-h-screen bg-gray-100">
         <Navbar />
 
-        <main className="mx-auto max-w-6xl px-4 py-4">
+        <main className="mx-5 max-w-7xl px-4 py-4">
           {/* Top bar with date etc. */}
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
             <span>{now}</span>
@@ -42,21 +44,59 @@ export default function Home({ featuredArticles, otherArticles }) {
           <div className="grid gap-10 lg:grid-cols-4">
             {/* Left: Hero news */}
             <div className="lg:col-span-3">
-              {mainHero && <NewsCard article={mainHero} variant="hero" />}
+              {/* Top Hindi News section */}
+              <CategorySection
+                title="Top Hindi News"
+                articles={featuredArticles.slice(0, 6)}
+                viewMoreHref="/"
+              />
 
-              {/* Below hero: list of other highlighted articles */}
-              <section className="mt-4 rounded-md bg-white p-3 shadow">
-                <h2 className="border-b border-gray-200 pb-2 text-lg font-bold text-red-700">
-                  Top News
-                </h2>
-                <div>
-                  {featuredArticles
-                    .filter((a) => a.slug !== mainHero.slug)
-                    .map((article) => (
-                      <NewsCard key={article.id} article={article} variant="topNews"/>
-                    ))}
-                </div>
-              </section>
+              {/* Ad strip between sections */}
+              <AdBanner />
+
+              {/* Another category, e.g. Technology / Entertainment */}
+              <CategorySection
+                title="More Technology News"
+                articles={otherArticles.slice(6, 12)}
+                viewMoreHref="/"
+              />
+
+              {/* You can add more sections similarly: */}
+              <AdBanner />
+              <CategorySection
+                title="Entertainment"
+                articles={otherArticles.slice(12, 18)}
+                viewMoreHref="/"
+              />
+              <AdBanner />
+              <CategorySection
+                title="World"
+                articles={otherArticles.slice(18, 24)}
+                viewMoreHref="/"
+              />
+              <AdBanner />
+              <CategorySection
+                title="Business"
+                articles={otherArticles.slice(5,11)}
+                viewMoreHref="/"
+              />
+              <AdBanner />
+              <CategorySection
+                title="Religion"
+                articles={otherArticles.slice(11, 17)}
+                viewMoreHref="/"
+              />
+              <AdBanner />
+              <CategorySection
+                title="Space"
+                articles={otherArticles.slice(14,20)}
+                viewMoreHref="/"
+              /><AdBanner />
+              <CategorySection
+                title="Lifestyle"
+                articles={otherArticles.slice(8, 14)}
+                viewMoreHref="/"
+              />
             </div>
 
             {/* Right column: side section */}
@@ -74,7 +114,7 @@ export default function Home({ featuredArticles, otherArticles }) {
                 <h2 className="border-b border-gray-200 pb-2 text-sm font-bold">
                   Sponsored
                 </h2>
-                <p className="mt-2 text-sm text-gray-600" >
+                <p className="mt-2 text-sm text-gray-600">
                   This section can be used for advertisements.
                 </p>
               </section>
