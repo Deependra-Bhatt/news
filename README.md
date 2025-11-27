@@ -204,8 +204,9 @@ http://localhost:3000
 This project successfully replicates the structure and experience of a real news portal using modern technologies.
 
 It demonstrates:
--✅ Real-world UI design
--✅ Efficient data fetching
--✅ Error handling
--✅ Scalability
--✅ Best practices of Next.js
+
+- ✅ Real-world UI design
+- ✅ Efficient data fetching
+- ✅ Error handling
+- ✅ Scalability
+- ✅ Best practices of Next.js
